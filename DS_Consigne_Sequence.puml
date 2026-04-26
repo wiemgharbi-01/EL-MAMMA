@@ -1,0 +1,60 @@
+@startuml
+
+actor Etudiant
+participant Menu
+participant Plat
+participant Commande
+participant Paiement
+participant Cuisiniere
+participant Consigne
+
+' ======================
+' CONSULTATION
+' ======================
+Etudiant -> Menu : consulter()
+Menu -> Plat : afficherListe()
+
+' ======================
+' SELECTION
+' ======================
+Etudiant -> Plat : choisir()
+
+' ======================
+' COMMANDE
+' ======================
+Etudiant -> Commande : creer()
+
+Commande -> Plat : verifierStock()
+
+alt stock OK
+    Commande -> Plat : decrementerStock()
+    Commande -> Commande : calculerPrixFinal()
+
+    ' ======================
+    ' CONSIGNE
+    ' ======================
+    Commande -> Consigne : verifier()
+
+    alt consigne OK
+        Commande -> Commande : appliquerRemise()
+    end
+
+    ' ======================
+    ' PAIEMENT
+    ' ======================
+    Etudiant -> Paiement : payer()
+    Paiement -> Etudiant : debiterSolde()
+
+    Paiement -> Commande : valider()
+
+    ' ======================
+    ' CUISINE
+    ' ======================
+    Commande -> Cuisiniere : notifier()
+    Cuisiniere -> Commande : changerStatut(PRETE)
+
+else stock insuffisant
+    Commande -> Etudiant : refus()
+end
+
+@enduml
