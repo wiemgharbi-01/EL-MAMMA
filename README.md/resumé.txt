@@ -1,0 +1,21 @@
+Nom du Projet : El-MAMMA
+
+Pitch : El-MAMMA est une plateforme digitale innovante conçue pour transformer l'expérience de restauration universitaire en Tunisie. En alliant technologie et écologie, l'application fluidifie la gestion des repas tout en encourageant les étudiants à adopter des comportements éco-responsables grâce à un système intelligent de gestion des consignes.
+
+Membres de l'équipe (Groupe A08) : Le projet est porté par une équipe complémentaire organisée selon la méthodologie Agile :
+
+Issef Ferjani (Scrum Master)
+
+Aziz Louati (Product Owner)
+
+Hazem Ben Brahim, Wiem Gharbi et Takwa Hanzouti (Équipe de Développement)
+
+Fonctionnalités Clés : * Catalogue Dynamique : Consultation en temps réel des menus avec filtrage par prix et popularité.
+
+Gestion des Stocks Synchronisée : Mise à jour instantanée des disponibilités pour éviter les commandes hors-stock.
+
+Portefeuille Virtuel & Paiement : Système de paiement sécurisé intégré pour des transactions rapides sans espèces.
+
+Remise Éco-Responsable : Application automatique d'une réduction de 10% sur le prix du repas lorsque l'étudiant retourne sa consigne (boîte réutilisable).
+
+Suivi de Préparation : Interface dédiée à la cuisine pour informer l'étudiant de l'état de sa commande (en préparation / prête).

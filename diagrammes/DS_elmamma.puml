@@ -1,0 +1,46 @@
+@startuml
+title Diagramme de Séquence : Flux de Réservation & Paiement
+
+actor Étudiant
+boundary "UI Application" as UI
+participant "Catalogue" as Cat
+participant "Plat" as P
+participant "Portefeuille" as Port
+participant "Commande" as C
+
+Étudiant -> UI : Sélectionner plat & cliquer réserver
+activate UI
+
+UI -> Cat : verifierStock(platId)
+activate Cat
+Cat -> P : getStock()
+P --> Cat : quantite > 0
+Cat --> UI : Disponible
+deactivate Cat
+
+UI -> C : calculerPrixFinal()
+activate C
+note right: Vérifie si consigneRendue == true (-10%)
+C --> UI : montant final
+deactivate C
+
+UI -> Port : debiter(montant)
+activate Port
+Port -> Port : verifierSolde()
+Port --> UI : Paiement accepté
+deactivate Port
+
+UI -> P : decrementerStock(1)
+activate P
+P --> UI : Stock mis à jour
+deactivate P
+
+UI -> C : confirmerCommande()
+activate C
+C -> C : genererReference()
+C --> UI : Commande #C-1247 créée
+deactivate C
+
+UI --> Étudiant : Affichage confirmation + N° Commande
+deactivate UI
+@enduml

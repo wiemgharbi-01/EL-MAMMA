@@ -1,0 +1,79 @@
+@startuml
+title Diagramme de Classes Harmonisé - El-MAMMA
+
+abstract class Utilisateur {
+    # id : long
+    # nom : String
+    # email : String
+    # motDePasse : String
+    + seConnecter()
+    + seDeconnecter()
+}
+
+class Etudiant {
+    - consigneRendue : boolean
+    + consulterSolde()
+    + prepayerRepas(montant: double)
+}
+
+class Cuisiniere {
+    - specialite : String
+    + modifierStatut(c: Commande, s: StatutCommande)
+}
+
+class Portefeuille {
+    - id : long
+    - solde : double
+    - devise : String
+    + crediter(montant: double)
+    + debiter(montant: double) : boolean
+}
+
+class Transaction {
+    - idTransaction : int
+    - montant : double
+    - date : Date
+    - type : String
+    + enregistrer()
+}
+
+class Plat {
+    - id : int
+    - nom : String
+    - prix : double
+    + verifierDisponibilite() : boolean
+}
+
+class Stock {
+    - id : int
+    - quantite : int
+    + decrementer(qte: int) : boolean
+}
+
+class Commande {
+    - id : int
+    - reference : String
+    - dateReservation : LocalDateTime
+    - heurePrete : LocalDateTime
+    - statut : StatutCommande
+    + calculerHeurePrete()
+    + genererReference()
+}
+
+enum StatutCommande {
+    COMMANDE
+    EN_COURS
+    PRET
+}
+
+Utilisateur <|-- Etudiant
+Utilisateur <|-- Cuisiniere
+
+Etudiant "1" *-- "1" Portefeuille : possède
+Portefeuille "1" o-- "0..*" Transaction : contient
+
+Etudiant "1" -- "0..*" Commande : passe
+Commande "0..*" -- "1" Plat : concerne
+Plat "1" -- "1" Stock : possède
+
+@enduml
